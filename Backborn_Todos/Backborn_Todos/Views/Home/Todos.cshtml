@@ -1,0 +1,83 @@
+﻿
+@section scriptsHead {
+<link rel="stylesheet" href="/Content/manual/todos.css" />
+}
+
+@{
+    ViewBag.Title = "Todos";
+}
+
+
+
+
+<input type="text" class="search-query" placeholder="入力してください"> 
+
+<div class="row">
+    <div id="todoapp">
+        <header>
+            <h1>Todos</h1>
+            <input id="new-todo" type="text"  placeholder="What needs to be done?">
+        </header>
+        <section id="main">
+            <input id="toggle-all" type="checkbox">
+            <label for="toggle-all">全て完了させる</label>
+            <ul id="todo-list"></ul>
+        </section>
+        <footer>
+            <a id="clear-completed">完了したものを取り除く</a>
+            <div id="todo-count"></div>
+        </footer>
+    </div>
+    <div id="instructions">
+        <p>編集するにはダブルクリックしてください</p>
+        <p>順番を並び替えるにはドラッグ・アンド・ドロップしてください</p>
+    </div>
+    <div id="credits">
+        Created by
+        <br />
+        <a href="http://jgn.me/">J&eacute;r&ocirc;me Gravel-Niquet</a>.
+        <br />
+        Refactored by
+        <br />
+        <a href="http://github.com/taka849">Yuku Takahashi</a>.
+        <br />
+        Modified by(Visaul Studio 2013)
+        <br />
+        <a href="http://www.facebook.com/seiji.noro">Seiji Noro</a>.
+
+        <br />
+        Exceedone Blog 
+        <br />
+        <a href="http://tech.exceedone.co.jp/asp-net-mvc/visualstudio2013-mvc5-with-twitterbootstrap-todos/">VisualStudio2013 MVC5 with Twitterbootstrapにおいて、Backborn.js でTodos のサンプルを組み込んでみた。</a>.
+            
+
+
+    </div>
+
+
+
+</div>
+
+
+@section scripts {
+<script src="/Scripts/underscore.min.js"></script>
+<script src="/Scripts/backbone.min.js"></script>
+<script src="/Scripts/manual/backbone.localStorage-1.1.0.js"></script>
+<script src="/Scripts/manual/todos.js"></script>
+  <script type="text/template" id="item-template">
+    <div class="view" draggable="true" dropzone="move">
+      <input class="toggle" type="checkbox" <%= done ? 'checked="checked"' : '' %> />
+      <label><%- title %></label>
+      <a class="destroy"></a>
+    </div>
+    <input class="edit" type="text" value="<%- title %>" />
+  </script>
+
+  <script type="text/template" id="stats-template">
+    <% if (done) { %>
+      <a id="clear-completed">Clear <%= done %> completed <%= done == 1 ? 'item' : 'items' %></a>
+    <% } %>
+    <div class="todo-count"><b><%= remaining %></b> <%= remaining == 1 ? 'item' : 'items' %> left</div>
+  </script>
+
+}
