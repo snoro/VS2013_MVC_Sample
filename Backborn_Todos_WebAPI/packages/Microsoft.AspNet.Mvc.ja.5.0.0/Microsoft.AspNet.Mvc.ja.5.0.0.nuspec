@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
+  <metadata>
+    <id>Microsoft.AspNet.Mvc.ja</id>
+    <version>5.0.0</version>
+    <title>Microsoft ASP.NET MVC 日本語リソース</title>
+    <authors>Microsoft</authors>
+    <owners>Microsoft</owners>
+    <licenseUrl>http://www.microsoft.com/web/webpi/eula/aspnetcomponent_rtw_JPN.htm</licenseUrl>
+    <projectUrl>http://www.asp.net/mvc</projectUrl>
+    <requireLicenseAcceptance>true</requireLicenseAcceptance>
+    <description>このパッケージには、ASP.NET MVC の 日本語 サテライト アセンブリが含まれています。</description>
+    <summary>Microsoft.AspNet.Mvc パッケージの 日本語 リソース</summary>
+    <copyright>© Microsoft Corporation.All rights reserved.</copyright>
+    <language>ja</language>
+    <tags>Microsoft AspNet Mvc AspNetMvc</tags>
+    <dependencies>
+      <dependency id="Microsoft.AspNet.Mvc" version="[5.0.0]" />
+    </dependencies>
+  </metadata>
+</package>
