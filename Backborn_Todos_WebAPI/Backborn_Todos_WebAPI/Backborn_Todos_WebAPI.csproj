@@ -163,8 +163,6 @@
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
     <Content Include="Scripts\backbone.localStorage-1.1.0.js" />
-    <Content Include="Scripts\json2.js" />
-    <Content Include="Scripts\json2.min.js" />
     <Content Include="Scripts\Users\todos_WebAPI.js" />
     <Content Include="Scripts\Users\todos.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
