@@ -32,7 +32,7 @@
     model: Todo,
 
     //localStorage: new Backbone.LocalStorage("todos"),
-    url: function () { return '/api/Todos'; },
+    url: function () { return '/api/todos'; },
 
 
     // Modelの特定の属性値で昇順にソートする場合は名前だけでよい

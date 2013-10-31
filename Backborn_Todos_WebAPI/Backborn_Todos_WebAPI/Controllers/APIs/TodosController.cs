@@ -6,57 +6,57 @@ using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
-using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Http.Description;
+using Backborn_Todos_WebAPI.Models;
 
-namespace Backborn_Todos_WebAPI.Models
+namespace Backborn_Todos_WebAPI.Controllers.APIs
 {
     public class TodosController : ApiController
     {
-        private Entities db = new Entities();
+        private Backborn_Todos_WebAPIContext db = new Backborn_Todos_WebAPIContext();
 
         // GET api/Todos
-        public IQueryable<Todos> GetTodos()
+        public IQueryable<Todo> GetTodoes()
         {
-            return db.Todos;
+            return db.Todoes;
         }
 
         // GET api/Todos/5
-        [ResponseType(typeof(Todos))]
-        public async Task<IHttpActionResult> GetTodos(int id)
+        [ResponseType(typeof(Todo))]
+        public IHttpActionResult GetTodo(int id)
         {
-            Todos todos = await db.Todos.FindAsync(id);
-            if (todos == null)
+            Todo todo = db.Todoes.Find(id);
+            if (todo == null)
             {
                 return NotFound();
             }
 
-            return Ok(todos);
+            return Ok(todo);
         }
 
         // PUT api/Todos/5
-        public async Task<IHttpActionResult> PutTodos(int id, Todos todos)
+        public IHttpActionResult PutTodo(int id, Todo todo)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            if (id != todos.Id)
+            if (id != todo.Id)
             {
                 return BadRequest();
             }
 
-            db.Entry(todos).State = EntityState.Modified;
+            db.Entry(todo).State = EntityState.Modified;
 
             try
             {
-                await db.SaveChangesAsync();
+                db.SaveChanges();
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!TodosExists(id))
+                if (!TodoExists(id))
                 {
                     return NotFound();
                 }
@@ -70,34 +70,34 @@ namespace Backborn_Todos_WebAPI.Models
         }
 
         // POST api/Todos
-        [ResponseType(typeof(Todos))]
-        public async Task<IHttpActionResult> PostTodos(Todos todos)
+        [ResponseType(typeof(Todo))]
+        public IHttpActionResult PostTodo(Todo todo)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            db.Todos.Add(todos);
-            await db.SaveChangesAsync();
+            db.Todoes.Add(todo);
+            db.SaveChanges();
 
-            return CreatedAtRoute("DefaultApi", new { id = todos.Id }, todos);
+            return CreatedAtRoute("DefaultApi", new { id = todo.Id }, todo);
         }
 
         // DELETE api/Todos/5
-        [ResponseType(typeof(Todos))]
-        public async Task<IHttpActionResult> DeleteTodos(int id)
+        [ResponseType(typeof(Todo))]
+        public IHttpActionResult DeleteTodo(int id)
         {
-            Todos todos = await db.Todos.FindAsync(id);
-            if (todos == null)
+            Todo todo = db.Todoes.Find(id);
+            if (todo == null)
             {
                 return NotFound();
             }
 
-            db.Todos.Remove(todos);
-            await db.SaveChangesAsync();
+            db.Todoes.Remove(todo);
+            db.SaveChanges();
 
-            return Ok(todos);
+            return Ok(todo);
         }
 
         protected override void Dispose(bool disposing)
@@ -109,9 +109,9 @@ namespace Backborn_Todos_WebAPI.Models
             base.Dispose(disposing);
         }
 
-        private bool TodosExists(int id)
+        private bool TodoExists(int id)
         {
-            return db.Todos.Count(e => e.Id == id) > 0;
+            return db.Todoes.Count(e => e.Id == id) > 0;
         }
     }
 }
