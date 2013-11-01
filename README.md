@@ -1,7 +1,7 @@
 VS2013_MVC_Sample
 =================
 
-Visual Studio 2013 MVC5 Sample with Backborn.js and Twitterbootstrap
+Visual Studio 2013 MVC5 Sample with Backborn.js/Knockout.js and Twitterbootstrap
 
 [Todos]
 
