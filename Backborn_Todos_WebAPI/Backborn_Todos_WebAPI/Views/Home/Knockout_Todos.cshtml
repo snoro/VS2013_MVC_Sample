@@ -1,0 +1,65 @@
+﻿
+@{
+    ViewBag.Title = "Knockout_Todos";
+}
+
+<h2>Todo: Knockout.js with Twitterbootsrap</h2>
+
+<div class="container">
+    <p>
+        <input type="text" value="" placeholder="Enter Todo" data-bind="value: todoInputValue"> <button data-bind="click:addTodo">Add</button>
+    </p>
+
+    <table class="table table-hover">
+        <thead>
+            <tr><th>Todo</th><th>Delete</th></tr>
+        </thead>
+        <tbody data-bind="foreach: todoList">
+            <tr>
+                <td data-bind="text: todoText"></td>
+                <td><button data-bind="click:$root.removeTodo" class="btn btn-default">削除</button></td>            
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+
+@section scripts{
+    <script src="~/Scripts/knockout-3.0.0.js"></script>
+
+    <script type="text/javascript">
+        $(function () {
+
+            //Modelを定義
+            function TodoModel(value) {
+                var self = this;
+                self.todoText = ko.observable(value);
+            }
+
+            //ViewModelを定義
+            function TestappViewModel() {
+                var self = this;
+
+                self.todoList = ko.observableArray(); //todoの配列
+                self.todoInputValue = ko.observable(''); //todo 入力値
+
+                //Todo追加
+                self.addTodo = function (obj, e) {
+                    if (!self.todoInputValue()) return; 
+
+                    //配列に追加する。
+                    self.todoList.unshift(new TodoModel(self.todoInputValue()));
+                    //入力値を消去する。
+                    self.todoInputValue('');
+                };
+
+                //To削除
+                self.removeTodo = function (obj, e) {
+                    self.todoList.remove(obj);
+                };
+            }
+            //binding (View - VIewMode)
+            ko.applyBindings(new TestappViewModel());
+        });
+    </script>
+}
