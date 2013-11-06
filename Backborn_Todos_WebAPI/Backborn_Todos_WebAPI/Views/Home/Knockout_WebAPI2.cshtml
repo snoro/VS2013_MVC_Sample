@@ -1,0 +1,182 @@
+﻿
+@section scriptsHead {
+<link rel="stylesheet" href="/Content/Users/todos.css" />
+}
+
+@{
+    ViewBag.Title = "Backborn.js Todos_WebAPI(SQL Azure)";
+}
+
+<br>
+<br>
+<br>
+<br>
+<br>
+
+
+<h2>Knockout demo with asp.net web forms and asp.net webapi</h2>
+
+<div id="dvemplist" data-bind="template: { name: templateDisplayed, foreach: Emps }"></div> 
+
+
+@section scripts{
+    <script src="~/Scripts/knockout-3.0.0.js"></script>
+
+
+    <!--Templates-->
+    <!--View Template--> 
+    <script type="text/html" id="viewtemplate"> 
+        <table class="table table-hover"> 
+          <tr> 
+           <td>Id</td> 
+           <td> 
+            <span data-bind="text: $data.Id"></span> 
+           </td> 
+          </tr> 
+          <tr> 
+           <td>Name</td> 
+           <td> 
+            <span data-bind="text: $data.Name"></span> 
+           </td> 
+          </tr> 
+          <tr> 
+           <td>Salary</td> 
+           <td> 
+            <span data-bind="text: $data.Salary"></span> 
+           </td> 
+          </tr> 
+          <tr> 
+           <td>Depertment</td> 
+           <td> 
+            <span data-bind="text: $data.Depertment"></span> 
+           </td> 
+          </tr> 
+          <tr> 
+            <td>Memo</td> 
+            <td> 
+             <span data-bind="text: $data.Memo"></span> 
+            </td> 
+           </tr> 
+           <tr> 
+            <td> 
+                <button data-bind="click: function () { objEmpViewModel.editRecordtemplate($data); }">Edit</button> 
+           </td> 
+          </tr> 
+        </table> 
+    </script> 
+    <!--Ends Here-->
+
+
+
+    <!--Edit Template--> 
+    <script id="edittemplate" type="text/html"> 
+        <table class="table table-hover"> 
+        <tr> 
+          <td>Id</td> 
+          <td> 
+           <input type="text" data-bind="value: $data.Id" disabled="disabled"/> 
+          </td> 
+        </tr> 
+        <tr> 
+          <td>Name</td> 
+          <td> 
+           <input type="text" data-bind="value: $data.Name"/> 
+          </td> 
+        </tr> 
+        <tr> 
+          <td>Salary</td> 
+          <td> 
+           <input type="text" data-bind="value: $data.Salary"/> 
+          </td> 
+        </tr> 
+        <tr> 
+          <td>Depertment</td> 
+          <td> 
+           <input type="text" data-bind="value: $data.Depertment"/> 
+          </td> 
+        </tr> 
+        <tr> 
+          <td>Memo</td> 
+          <td> 
+           <input type="text" data-bind="value: $data.Memo"/> 
+          </td> 
+        </tr> 
+        <tr> 
+          <td> 
+              <input type="button" id="btnsave" value="Save" data-bind="click: objEmpViewModel.Save" /> 
+          </td> 
+          <td> 
+              <input type="button" id="btncancel" value="Cancel" data-bind="click: function () { objEmpViewModel.resettemplate(); }" /> 
+          </td> 
+        </tr> 
+        </table> 
+        <!--Ends Here-->
+    </script> 
+    <!--Ends Here-->
+
+
+
+    <script type="text/javascript">
+        function EmpViewModel() {
+            var self = this;
+
+            self.Emps = ko.observableArray([]);
+            self.viewRecordtemplate = ko.observable("viewtemplate");
+            self.editRecordtemplate = ko.observable();
+
+            self.templateDisplayed = function (t) {
+                return t === self.editRecordtemplate() ? 'edittemplate' :
+                    self.viewRecordtemplate();
+            };
+
+            self.Save = function (t) {
+                var Employee = {};
+                Employee.Id = t.Id;
+                Employee.Name = t.Name;
+                Employee.Depertment = t.Depertment;
+                Employee.Salary = t.Salary;
+                Employee.Memo = t.Memo;
+                $.ajax({
+                    type: "PUT",
+                    url: "/api/Employee/" + Employee.Id,
+                    data: Employee,
+                    success: function (data) {
+                        alert("Record Updated Successfully ");
+                        self.resettemplate();
+                    },
+                    error: function (err) {
+                        alert("Error Occured, Please Reload the Page and Try Again " + err.status);
+                        self.resettemplate(t);
+                    }
+                });
+            };
+
+            self.resettemplate = function (t) {
+                self.editRecordtemplate("viewtemplate");
+            };
+        }
+
+        var objEmpViewModel = new EmpViewModel();
+        ko.applyBindings(objEmpViewModel);
+
+
+        //初期データ読み込み
+        $(document).ready(function () {
+            $.ajax({
+                type: "GET",
+                url: "/api/Employee",
+                //contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (data) {
+                    //一度で全部設定する場合
+                    objEmpViewModel.Emps(data);
+                },
+                error: function (err) {
+                    alert("Error : " + err.status + "   " + err.statusText);
+                }
+            });
+        });
+
+
+    </script>
+}
