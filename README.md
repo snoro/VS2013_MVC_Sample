@@ -43,6 +43,34 @@ Blog:
 
 --------------------------------------------------------
 
+
+[Data Add to SQL Azure(Knockout.js)]
+
+Web Site: http://vs-samples.azurewebsites.net/Home/Knockout_WebAPI1
+
+Blog: 
+
+  Knockout.js でSQL Azureに一覧表示、データ追加のサンプル（VisualStudio2013 MVC5 with Twitterbootstrap）
+
+  http://tech.exceedone.co.jp/javascript/visualstudio-2013-mvc5-with-twitterbootstrap-knockout-webapi1/
+  
+
+--------------------------------------------------------
+
+
+[Data Add to SQL Azure(Knockout.js)]
+
+Web Site: http://vs-samples.azurewebsites.net/Home/Knockout_WebAPI2
+
+Blog: 
+
+  Knockout.js でSQL Azureに一覧表示、データ更新のサンプル（VisualStudio2013 MVC5 with Twitterbootstrap）
+
+  http://tech.exceedone.co.jp/javascript/visualstudio-2013-mvc5-with-twitterbootstrap-knockout-webapi2/
+  
+
+--------------------------------------------------------
+
 [参考]
 
 Backborn.jsのTodosの説明
