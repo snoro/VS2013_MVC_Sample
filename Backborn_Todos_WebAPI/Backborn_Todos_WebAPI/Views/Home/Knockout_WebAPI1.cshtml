@@ -1,0 +1,112 @@
+﻿
+@section scriptsHead {
+<link rel="stylesheet" href="/Content/Users/todos.css" />
+}
+
+@{
+    ViewBag.Title = "Backborn.js Todos_WebAPI(SQL Azure)";
+}
+
+<br>
+<br>
+<br>
+<br>
+<br>
+
+
+<h2>Knockout.js WebAPI(SQL Azure) with Twitterbootsrap</h2>
+
+<input id="button_DataAdd" class="btn btn-primary" type="button" value="データ登録ボタン" />
+
+
+
+<table class="table table-hover">
+<thead>
+    <tr>
+        <td>Id</td>
+        <td>Name</td>
+        <td>Depertment</td>
+        <td>Salary</td>
+        <td>Memo</td>
+    </tr>
+</thead>
+<tbody data-bind="foreach: employees">
+    <tr >
+        <td data-bind="text: Id"></td>
+        <td data-bind="text: Name"></td>
+        <td data-bind="text: Depertment"></td>
+        <td data-bind="text: Salary"></td>
+        <td data-bind="text: Memo"></td>
+    </tr>
+</tbody>
+</table>
+
+
+@section scripts {
+    <script src="~/Scripts/knockout-3.0.0.js"></script>
+
+    <script type="text/javascript">
+        var objViewModel =
+        {
+            employees: ko.observableArray([])
+        }
+
+        $(document).ready(function () {
+            $.ajax({
+                url: "/api/Employee",
+                contentType: "text/json",
+                type: "GET",
+                success: function (data) {
+                    $.each(data, function (index) {
+                        //Pushを使う場合
+                        objViewModel.employees.push(ToKnockOutObservable(data[index]));
+                    });
+                    ko.applyBindings(objViewModel);
+                },
+                error: function (err) {
+                    alert("error occured Error No=" + err.status);
+                }
+            });
+            function ToKnockOutObservable(employee) {
+                return {
+                    Id: ko.observable(employee.Id),
+                    Name: ko.observable(employee.Name),
+                    Depertment: ko.observable(employee.Depertment),
+                    Salary: ko.observable(employee.Salary),
+                    Memo: ko.observable(employee.Memo)
+                };
+            }
+
+
+            $("#button_DataAdd").click(function(){
+                var Employee = {};
+                Employee.Id = 0;
+                Employee.Name = "test";
+                Employee.Depertment = "testdepert";
+                Employee.Salary = 100;
+                Employee.Memo = "memo";
+
+                $.ajax({
+                    url: "/api/Employee",
+                    //contentType: "text/json",
+                    //contentType: 'application/json; charset=utf-8',
+                    type: 'POST',
+                    cache: false,
+                    data: Employee,
+                    //data: JSON.stringify(Employee),
+                    success: function (data) {
+                        alert("Record Add Successfully ");
+                        objViewModel.employees.push(ToKnockOutObservable(data));
+                    },
+                    error: function (err) {
+                        alert("Error Occured, Error No" + err.status);
+                    }
+
+                });
+            });
+        });
+
+        
+
+    </script>
+}

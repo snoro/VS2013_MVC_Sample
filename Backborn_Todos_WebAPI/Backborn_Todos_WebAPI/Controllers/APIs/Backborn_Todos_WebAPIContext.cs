@@ -20,6 +20,9 @@ namespace Backborn_Todos_WebAPI.Models
         }
 
         public System.Data.Entity.DbSet<Backborn_Todos_WebAPI.Models.Todo> Todoes { get; set; }
+
+        public System.Data.Entity.DbSet<Backborn_Todos_WebAPI.Models.Employee> Employees { get; set; }
+
     
     }
 }

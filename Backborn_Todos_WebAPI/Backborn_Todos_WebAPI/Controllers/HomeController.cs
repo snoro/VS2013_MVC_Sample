@@ -26,6 +26,17 @@ namespace Backborn_Todos.Controllers
             return View();
         }
 
+        public ActionResult Knockout_WebAPI1()
+        {
+            return View();
+        }
+
+        public ActionResult Knockout_WebAPI2()
+        {
+            return View();
+        }
+
+
         
 
         public ActionResult About()
