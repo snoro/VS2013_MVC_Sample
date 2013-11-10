@@ -23,6 +23,8 @@ namespace Backborn_Todos_WebAPI.Models
 
         public System.Data.Entity.DbSet<Backborn_Todos_WebAPI.Models.Employee> Employees { get; set; }
 
+        public System.Data.Entity.DbSet<Backborn_Todos_WebAPI.Models.Memo> Memos { get; set; }
+
     
     }
 }
