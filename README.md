@@ -7,7 +7,7 @@ Visual Studio 2013 MVC5 Sample with Backborn.js/Knockout.js and Twitterbootstrap
 
 [Todos(Backborn.js)]
 
-Web Site: http://vs-samples.azurewebsites.net/Home/Todos
+Web Demo Site: http://vs-samples.azurewebsites.net/Home/Todos
 
 Blog: 
 
@@ -19,7 +19,7 @@ Blog:
 
 [Todos_WebAPI(Backborn.js) with SQL Azure]
 
-Web Site: http://vs-samples.azurewebsites.net/Home/Todos_WebAPI
+Web Demo Site: http://vs-samples.azurewebsites.net/Home/Todos_WebAPI
 
 Blog: 
 
@@ -32,7 +32,7 @@ Blog:
 
 [Todos(Knockout.js)]
 
-Web Site: http://vs-samples.azurewebsites.net/Home/Knockout_Todos
+Web Demo Site: http://vs-samples.azurewebsites.net/Home/Knockout_Todos
 
 Blog: 
 
@@ -46,7 +46,7 @@ Blog:
 
 [Data Add to SQL Azure(Knockout.js)]
 
-Web Site: http://vs-samples.azurewebsites.net/Home/Knockout_WebAPI1
+Web Demo Site: http://vs-samples.azurewebsites.net/Home/Knockout_WebAPI1
 
 Blog: 
 
@@ -60,13 +60,27 @@ Blog:
 
 [Data Add to SQL Azure(Knockout.js)]
 
-Web Site: http://vs-samples.azurewebsites.net/Home/Knockout_WebAPI2
+Web Demo Site: http://vs-samples.azurewebsites.net/Home/Knockout_WebAPI2
 
 Blog: 
 
   Knockout.js でSQL Azureに一覧表示、データ更新のサンプル（VisualStudio2013 MVC5 with Twitterbootstrap）
 
   http://tech.exceedone.co.jp/javascript/visualstudio-2013-mvc5-with-twitterbootstrap-knockout-webapi2/
+  
+
+--------------------------------------------------------
+
+
+[Single Page Application (Knockout.js, Sammy.jS, SQL Azure)]
+
+Web Demo Site: http://vs-samples.azurewebsites.net/Home/SPA010
+
+Blog: 
+
+  SPA(Single Page Application) for knockout.js + TwitterBootstrap + Sammy.js + SQL Azure + Visual Studio2013
+
+  http://tech.exceedone.co.jp/javascript/visualstudio-2013-mvc5-with-twitterbootstrap-knockout-spa/
   
 
 --------------------------------------------------------
