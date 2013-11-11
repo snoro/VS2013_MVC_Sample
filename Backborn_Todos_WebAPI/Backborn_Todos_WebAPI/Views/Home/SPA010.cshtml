@@ -91,6 +91,12 @@
         </tr>
         </thead>
         <tbody >
+            <!--ko if: koSPAIsVisibleDetail_Update -->
+            <tr>
+                <td>Id</td>
+                <td><span data-bind="text: koSPA_Detail.Title"></span></td>
+            </tr>
+            <!--/ko-->
             <tr>
                 <td>Title</td>
                 <td><input type="text" data-bind="value: koSPA_Detail.Title" /></td>
