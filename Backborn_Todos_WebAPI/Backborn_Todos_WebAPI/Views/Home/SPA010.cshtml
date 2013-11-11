@@ -26,6 +26,7 @@
     <table class="table table-striped">
         <thead>
         <tr>
+            <th>Id</th>
             <th>タイトル</th>
             <th>日付</th>
             <th></th>
@@ -33,6 +34,7 @@
         </thead>
         <tbody data-bind="foreach: koSPA_List">
             <tr data-bind="click: locationDetailUpdate">
+                <td data-bind="text: Id"></td>
                 <td data-bind="text: Title"></td>
                 <td data-bind="text: Timestamp"></td>
                 <td><span class="glyphicon glyphicon-chevron-right"></span></td>
@@ -94,7 +96,7 @@
             <!--ko if: koSPAIsVisibleDetail_Update -->
             <tr>
                 <td>Id</td>
-                <td><span data-bind="text: koSPA_Detail.Title"></span></td>
+                <td><span data-bind="text: koSPA_Detail.Id"></span></td>
             </tr>
             <!--/ko-->
             <tr>
