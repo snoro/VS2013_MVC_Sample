@@ -11,11 +11,11 @@
 <div class="header">
     <h2>一覧</h2>
     <button type="button" class="btn btn-primary" data-bind="click: loadDetails">
-        <span class="glyphicon glyphicon-refresh"></span>再読込
+        再読込
     </button>
 
     <button type="button" class="btn btn-warning" data-bind="click: locationDetailCreate">
-        <span class="glyphicon glyphicon-plus"></span>新規作成
+        新規作成
     </button>
     <br>
     <span class="label label-default">データ件数</span><span data-bind="text: koSPA_List().length"></span>
@@ -35,7 +35,7 @@
             <tr data-bind="click: locationDetailUpdate">
                 <td data-bind="text: Title"></td>
                 <td data-bind="text: Timestamp"></td>
-                <td><span class="glyphicon glyphicon-circle-arrow-right"></span></td>
+                <td><span class="glyphicon glyphicon-chevron-right"></span></td>
             </tr>
         </tbody>
     </table>
@@ -62,17 +62,17 @@
 
 
     <!--ko if: koSPAIsVisibleDetail_Update -->
-    <button type="button" class="btn btn-warning" data-bind="click: DBDetailUpdate">
-        <span class="glyphicon glyphicon-ok"></span>更新
+    <button type="button" class="btn btn-warning" data-bind="click: updateDetailToDB">
+        更新
     </button>
-    <button type="button" class="btn btn-danger" data-bind="click: DBDetailDelete">
-        <span class="glyphicon glyphicon-remove"></span>削除
+    <button type="button" class="btn btn-danger" data-bind="click: deleteDetailFromDB">
+        削除
     </button>
     <!--/ko-->
 
     <!--ko ifnot: koSPAIsVisibleDetail_Update -->
-    <button type="button" class="btn btn-warning" data-bind="click: DBDetailCreate">
-        <span class="glyphicon glyphicon-plus"></span>新規作成
+    <button type="button" class="btn btn-warning" data-bind="click: createDetailToDB">
+        新規作成
     </button>
     <!--/ko-->
 
@@ -83,7 +83,7 @@
 
 <div class="results">
 
-    <table class="table table-striped">
+    <table class="table">
         <thead>
         <tr>
             <th>項目名</th>
@@ -116,7 +116,7 @@
 @section scripts{
     <script type="text/javascript" src="/Scripts/knockout-3.0.0.js"></script>
     <script type="text/javascript" src="/Scripts/sammy-0.7.4.js"></script>
-    <script type="text/javascript" src="/Scripts/Users/knockout-SPA-0.1.0.js?201311110301"></script>
+    <script type="text/javascript" src="/Scripts/Users/knockout-SPA-0.1.0.js?201311110301C"></script>
 
     <script type="text/javascript">
         $(document).ready(function () {
@@ -150,16 +150,22 @@
                 }
 
             }
-            //Using Create & Update Detail to Database
+            //Using Post Detail to Database 
+            //when Detail-Create-Button is clicked
+            //or  Detail-Update-Button is clicked
             koSPAParm.koSPA_ViewModel.createDetailToObj = function () {
                 var objDetail = {
+                    //ID不要
                     Title: this.koSPA_Detail.Title(),
                     Content: this.koSPA_Detail.Content(),
                     Timestamp: this.koSPA_Detail.Timestamp()
                 };
+
                 return objDetail
             }
-            //Using Initialize Detail When Add New button Clicked
+
+            //Using Initialize Detail 
+            //When List-Create-button is clicked
             koSPAParm.koSPA_ViewModel.initDetail = function () {
                 this.koSPA_Detail.Id(-1);
                 this.koSPA_Detail.Title("");
@@ -167,7 +173,8 @@
                 this.koSPA_Detail.Timestamp(new Date());
             }
 
-            //Using set Data to Detail When Selected Detail of List
+            //Using Set List to Detail 
+            //When List-Row is clicked
             koSPAParm.koSPA_ViewModel.setListToDetail = function (detailOfList) {
                 this.koSPA_Detail.Id(detailOfList.Id());
                 this.koSPA_Detail.Title(detailOfList.Title());
@@ -175,8 +182,18 @@
                 this.koSPA_Detail.Timestamp(detailOfList.Timestamp());
 
             }
+            //Using Set Detal to List 
+            //When Detail-Update-button is clicked
+            koSPAParm.koSPA_ViewModel.setDetailToList = function (detailOfList) {
+                detailOfList.Id(this.koSPA_Detail.Id());
+                detailOfList.Title(this.koSPA_Detail.Title());
+                detailOfList.Content(this.koSPA_Detail.Content());
+                detailOfList.Timestamp(this.koSPA_Detail.Timestamp());
+            }
 
-            //Using Add List When Load Detail and Cretae Data 
+            //Using Add Detail to List 
+            //When List-Load-button is Clicked 
+            //or Detail-Create-button is clicked
             koSPAParm.koSPA_ViewModel.createDBDetailToObj = function (DBDetail) {
                 var objDetail = new koSPAParm.koSPA_Model_Detail()
                             .Id(DBDetail.Id)
@@ -184,12 +201,7 @@
                             .Content(DBDetail.Content)
                             .Timestamp(DBDetail.Timestamp);
                 return objDetail;
-            }
-            //Using Update List When Changed Deail Data 
-            koSPAParm.koSPA_ViewModel.setDetailToList = function (detailOfList) {
-                detailOfList.Title(this.koSPA_Detail.Title());
-                detailOfList.Content(this.koSPA_Detail.Content());
-                detailOfList.Timestamp(this.koSPA_Detail.Timestamp());
+
             }
             //knockout SPAを実行する
             var koSPAApp = $.koSPA.CreateApp(koSPAParm);

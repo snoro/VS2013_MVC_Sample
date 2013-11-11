@@ -94,7 +94,7 @@
             };
 
 
-            koSPAParm.koSPA_ViewModel.DBDetailCreate = function () {
+            koSPAParm.koSPA_ViewModel.createDetailToDB = function () {
                 var dbDetailData = this.createDetailToObj();
 
                 $.ajax({
@@ -113,7 +113,7 @@
             };
 
 
-            koSPAParm.koSPA_ViewModel.DBDetailUpdate = function () {
+            koSPAParm.koSPA_ViewModel.updateDetailToDB = function () {
                 var dbDetailData = this.createDetailToObj();
 
                 $.ajax({
@@ -130,7 +130,7 @@
                 })
             };
 
-            koSPAParm.koSPA_ViewModel.DBDetailDelete = function () {
+            koSPAParm.koSPA_ViewModel.deleteDetailFromDB = function () {
                 $.ajax({
                     type: "DELETE",
                     url: koSPAParm.url_Detail_Delete + koSPAParm.koSPA_ViewModel.koSPA_Detail.Id(),
