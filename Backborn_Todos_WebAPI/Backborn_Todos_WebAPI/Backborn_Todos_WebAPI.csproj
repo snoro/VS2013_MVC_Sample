@@ -175,6 +175,7 @@
     <Content Include="Scripts\sammy-0.7.4.min.js" />
     <Content Include="Scripts\Users\bootstrap-fix-winphone8.js" />
     <Content Include="Scripts\Users\knockout-SPA-0.1.0.js" />
+    <Content Include="Scripts\Users\knockout-SPA-0.1.1.js" />
     <Content Include="Scripts\Users\todos_WebAPI.js" />
     <Content Include="Scripts\Users\todos.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
